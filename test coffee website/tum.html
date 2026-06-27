@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keo Coffee Shop</title>
+    
+    <style>
+        /* Global & Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #fcf8f2;
+            color: #333;
+        }
+
+        /* ១. រៀបចំ Navbar (Toolbar) ឱ្យធំ និងខ្ពស់ជាងមុន */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px; /* បង្កើន padding ឱ្យធំជាងមុន */
+            background-color: #4a3b32;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        nav h1 {
+            font-size: 2rem; /* ពង្រីកអក្សរ Logo ឱ្យធំ */
+            letter-spacing: 2px;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px; /* បង្កើនគម្លាតរវាង Menu */
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px; /* ពង្រីកអក្សរ Menu ឱ្យធំងាយមើល */
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: goldenrod;
+        }
+
+        /* ២. រៀបចំ Hero Section (ខាងក្រោម Toolbar) ឱ្យតូច និងបង្រួមជាងមុន */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.spoton.com/blog/content/images/2024/04/espresso-shot-coffee-1.jpeg') no-repeat center center/cover;
+            height: 25vh; /* បន្ថយមកត្រឹម 25vh ឱ្យរាងតូចខ្លីស្អាត */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        .hero h1 {
+            font-size: 2rem; /* បន្ថយទំហំអក្សរចំណងជើង */
+            margin-bottom: 5px;
+        }
+        .hero p {
+            font-size: 1rem; /* បន្ថយទំហំអក្សររៀបរាប់ */
+            margin-bottom: 15px;
+        }
+        .hero button {
+            width: auto;
+            padding: 8px 30px; /* បង្រួមប៊ូតុងឱ្យតូចល្មម */
+            font-size: 14px;
+        }
+
+        /* ៣. រៀបចំប្រអប់ Items កាហ្វេខាងក្រោម ឱ្យធំជាងមុន (៤ កាតក្នុងមួយជួរ) */
+        .main_card {
+            display: flex;
+            gap: 25px; /* បង្កើនគម្លាតរវាងកាត */
+            flex-wrap: wrap;
+            justify-content: center; 
+            padding: 50px 20px;
+            max-width: 1400px; /* ពង្រីកទំហំផ្ទុកកាតឱ្យធំទូលាយ */
+            margin: 0 auto;
+        }
+
+        /* Individual Card (Items) - ប្តូរឱ្យធំជាងមុន */
+        .card {
+            width: calc(25% - 20px); /* កែមកត្រឹម ៤ កាតក្នុងមួយជួរ ដើម្បីឱ្យកាតនីមួយៗមើលទៅធំស្អាត */
+            min-width: 250px; /* បង្កើនប្រវែងទទឹងអប្បបរមា */
+            padding: 25px; /* បន្ថែមសាច់ក្នុងប្រអប់ */
+            background-color: white;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px); /* ពេល Hover ឱ្យអណ្តែតឡើងលើបន្តិច */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .card h2 {
+            font-size: 1.3rem; /* ពង្រីកឈ្មោះកាហ្វេ */
+            margin-bottom: 15px;
+            color: #4a3b32;
+        }
+        .card img {
+            width: 100%;
+            height: 200px; /* បង្កើនកម្ពស់រូបភាពឱ្យធំច្បាស់ */
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.5s ease;
+        }
+        .card:hover img {
+            transform: scale(1.06); /* លុបចោល height: 1px ចេញដើម្បីកុំឱ្យបាត់រូបភាព */
+        }
+        .card p {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        .card p:nth-of-type(2) {
+            font-weight: bold;
+            color: #7a5c43;
+            font-size: 1.2rem; /* ពង្រីកតម្លៃលុយ */
+            margin-bottom: 20px;
+        }
+
+        /* Buttons នៅក្នុង Card */
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            background: #d4a373;
+            transition: background 0.3s ease;
+            width: 100%; 
+        }
+        button:hover {
+            background: goldenrod;
+        }
+        
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #4a3b32;
+            color: white;
+            margin-top: 50px;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .card {
+                width: calc(50% - 20px); /* សល់ ២ កាតក្នុងមួយជួរលើ Tablet */
+            }
+        }
+        @media (max-width: 600px) {
+            .card {
+                width: 100%; /* សល់ ១ កាតពេញលើទូរស័ព្ទ */
+            }
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <h1>KEO COFFEE SHOP</h1>
+        <ul>
+            <li><a href="#"><b>Home</b></a></li>
+            <li><a href="#"><b>About</b></a></li>
+            <li><a href="#"><b>Sign In</b></a></li>
+            <li><a href="#"><b>Sign Out</b></a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>Fresh Coffee Everyday</h1>
+        <p>Enjoy the best coffee crafted by master baristas</p>
+        <button>Order Now</button>
+    </section>
+
+    <div class="main_card">
+        <div class="card">
+            <h2>LUNGO COFFEE</h2>
+            <img src="https://espressoescape.com/wp-content/uploads/2025/01/lungo-coffee-guide-brewing-enjoying-espresso50-768x768.jpg" alt="Lungo Coffee">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>DOPPIO</h2>
+            <img src="https://espressorivo.com/wp-content/uploads/2024/02/Doppio-coffee-1024x778.webp" alt="Doppio">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>HOT COFFEE</h2>
+            <img src="https://www.spoton.com/blog/content/images/2024/04/espresso-shot-coffee-1.jpeg" alt="Hot Coffee">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>ESPRESSO</h2>
+            <img src="https://tse2.mm.bing.net/th/id/OIP.q3taNAe_jFWukib99tw-tAHaHa?r=0&w=800&h=800&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Espresso">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>HOT COFFEE</h2>
+            <img src="https://www.spoton.com/blog/content/images/2024/04/espresso-shot-coffee-1.jpeg" alt="Hot Coffee">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>CAPPUCCINO</h2>
+            <img src="https://tse2.mm.bing.net/th/id/OIP.Pe-S01F7qQmyT8Md6QyK_wHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Cappuccino">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>MOCHA</h2>
+            <img src="https://th.bing.com/th/id/OSK.HEROzTbr7UaVnVqXOHXPtUQ96JiJmKYgHxFZiSdw8xqosgI?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Mocha">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+
+        <div class="card">
+            <h2>AMERICANO</h2>
+            <img src="https://www.spoton.com/blog/content/images/2024/04/espresso-shot-coffee-1.jpeg" alt="Americano">
+            <p>Smooth drink</p>
+            <p>Price: $2.50</p>
+            <button>Buy</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; www. coffee made in tabork /All rights reserved.</p>
+    </footer>
+</body>
+</html>
